@@ -6,7 +6,7 @@ then
   for fich in /home/$1/tmp; do  
     if [$fich -eq *.aux]; then
       if test -f $fich; then # test o [] ???
-	b=´ll $fich|sed "s/ */#/g" |cut -f5 d#´
+	b=´ls -l $fich|sed "s/ */#/g" |cut -f5 d#´
 	let a+=b
 	rm $fich
       fi
