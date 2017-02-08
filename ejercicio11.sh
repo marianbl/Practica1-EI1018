@@ -5,20 +5,15 @@ if test $# -lt 1; then
 fi
 
 if test -d $1; then # test o [] ???
-  for d in $1; do
-    direct=0
-    fichero=0
-    cont=1
-    if test -d $d; then
-      for a in $d; do
-	if test -d $a; then
-	  let direct+=cont
-	fi
-	if test -f a; then
-	  let fichero+=cont
-	fi
-	echo "El directorio $d tiene $direct directorios y $fichero ficheros"
-      done
-    fi
+  cd $1
+  for d in `ls -l |grep ^d`; do
+      cd $d
+      direct = `ls -l $d |grep ^d |wc -l`
+      fichero = `ls -l $d |grep ^- |wc -l`
+      echo "El subdirectorio $d tiene $direct directorios y $fichero ficheros"
+      cd ..
    done
+   
+else
+  echo "No se ha encontrado el directorio $1"
 fi
